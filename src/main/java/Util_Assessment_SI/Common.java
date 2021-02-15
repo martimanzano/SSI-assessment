@@ -12,18 +12,18 @@ import java.util.Map;
 
 public class Common {
     //UNBBAYES METHODS
-    public static DTOSIAssessment doInferenceUnbbayes(ProbabilisticNetwork net, Node SInode, Map<String, String> factorStates) throws Exception {
+    public static DTOSIAssessment doInferenceUnbbayes(ProbabilisticNetwork net, Node SInode, Map<String, String> elementStates) throws Exception {
         DTOSIAssessment ret = new DTOSIAssessment();
 
         IInferenceAlgorithm algorithm = new JunctionTreeAlgorithm();
         algorithm.setNetwork(net);
         algorithm.run();
 
-        for (String factor : factorStates.keySet()) {
-            ProbabilisticNode pnFactorNode = (ProbabilisticNode) net.getNode(factor);
-            int stateIndex = getStateIndex(pnFactorNode, factorStates.get(factor));
-            pnFactorNode.initMarginalList();
-            pnFactorNode.addFinding(stateIndex);
+        for (String element : elementStates.keySet()) {
+            ProbabilisticNode pnElementNode = (ProbabilisticNode) net.getNode(element);
+            int stateIndex = getStateIndex(pnElementNode, elementStates.get(element));
+            pnElementNode.initMarginalList();
+            pnElementNode.addFinding(stateIndex);
         }
 
         net.updateEvidences();
