@@ -1,8 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'com.upc.gessi.qrapids'
-version = '0.4'
+group = 'com.upc.gessi.SSI'
+version = '1'
 
 description = """"""
 
@@ -13,7 +13,7 @@ task customFatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'Assessment.SIAssessment'
     }
-    baseName = 'qrapids-si_assessment'
+    baseName = 'SSI_assessment'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
@@ -25,7 +25,7 @@ javadoc {
 }
 
 repositories {
-     maven { url "http://repo.maven.apache.org/maven2" }
+     maven { url "https://repo.maven.apache.org/maven2" }
 }
 
 dependencies {
@@ -41,4 +41,9 @@ dependencies {
     compile files('libs/unbayes/lib/javahelp-2.0.02.jar')
     compile files('libs/unbayes/lib/jaxme2-rt-0.5.1.jar')
     compile files('libs/unbayes/unbbayes-4.22.18.jar')
+
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'5.6.3'
+    compile group: 'org.elasticsearch.client', name: 'elasticsearch-rest-client', version:'5.6.3'
+    compile group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version:'5.6.3'
+    compile group: 'com.github.haifengl', name: 'smile-core', version:'2.5.3'
 }
